@@ -2,7 +2,9 @@
 
 #include <wx/panel.h>
 #include <wx/window.h>
+
 #include <vector>
+
 #include "Components/TrackHeader.h"
 
 class TrackHeaders 

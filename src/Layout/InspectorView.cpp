@@ -1,4 +1,5 @@
 #include "InspectorView.h"
+
 #include <wx/stattext.h>
 #include <wx/sizer.h>
 

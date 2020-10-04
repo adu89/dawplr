@@ -1,7 +1,5 @@
 #include "TrackHeaders.h"
 
-wxDECLARE_EVENT(TRACK_HEIGHT_CHANGED, wxCommandEvent);
-
 TrackHeaders::TrackHeaders(wxWindow* parent)
     : wxPanel(parent, wxID_ANY)
 {
@@ -48,7 +46,6 @@ int TrackHeaders::GetHeight()
 
 void TrackHeaders::HandleMouseWheelEvent(wxMouseEvent& m) 
 {    
-    m.ResumePropagation(wxEVENT_PROPAGATE_MAX);
     m.Skip();
 }
 

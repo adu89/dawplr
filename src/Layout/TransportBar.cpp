@@ -1,6 +1,8 @@
 #include "TransportBar.h"
+
 #include <wx/sizer.h>
 #include <wx/stattext.h>
+
 #include "Core/Constants.h"
 
 TransportBar::TransportBar(wxWindow* parent)

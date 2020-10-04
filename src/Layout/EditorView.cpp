@@ -3,6 +3,8 @@
 #include "core/Constants.h"
 #include "EditorContainer.h"
 
+wxDEFINE_EVENT(TRACKS_OFFSET_Y_CHANGED, wxCommandEvent);
+
 EditorView::EditorView(wxWindow* parent)
     : wxPanel(parent, wxID_ANY) 
     , tracksYOffSet(0)
@@ -35,7 +37,6 @@ void EditorView::OnSize(wxSizeEvent& e)
 
 void EditorView::HandleMouseWheelEvent(wxMouseEvent& m) 
 {
-    m.ResumePropagation(wxEVENT_PROPAGATE_MAX);
     m.Skip();
 }
 
@@ -44,7 +45,10 @@ void EditorView::ScrollUp(wxScrollWinEvent&)
     if(tracksYOffSet) 
     {
         tracksYOffSet -= wxMin(tracksYOffSet, Constants::SCROLL_SPEED);
-        static_cast<EditorContainer*>(GetParent())->OnTrackYOffsetChanged();
+        //static_cast<EditorContainer*>(GetParent())->OnTrackYOffsetChanged();
+
+        wxCommandEvent event(TRACKS_OFFSET_Y_CHANGED);
+        wxPostEvent(GetParent(), event);
     }
 }
 
@@ -54,7 +58,10 @@ void EditorView::ScrollDown(wxScrollWinEvent&)
     
     if(tracksYOffSet < maxOffset) {
         tracksYOffSet += wxMin(maxOffset - tracksYOffSet, Constants::SCROLL_SPEED);
-        static_cast<EditorContainer*>(GetParent())->OnTrackYOffsetChanged();
+        //static_cast<EditorContainer*>(GetParent())->OnTrackYOffsetChanged();
+
+        wxCommandEvent event(TRACKS_OFFSET_Y_CHANGED);
+        wxPostEvent(GetParent(), event);
     }
 }
 

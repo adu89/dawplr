@@ -2,7 +2,10 @@
 
 #include <wx/window.h>
 #include <wx/panel.h>
+
 #include "VScroller.h"
+
+wxDECLARE_EVENT(SCROLL_OFFSET_Y_CHANGED, wxCommandEvent);
 
 class VScroll 
     : public wxPanel 
@@ -15,7 +18,7 @@ public:
     void SetScrollOffset(float);
     float GetScrollOffset();   
     void OnMouseEvent(wxMouseEvent&);
-    void OnScrollYOffsetChanged();
+    void OnScrollYOffsetChanged(wxCommandEvent&);
 private:
     VScroller* scroller;
     float scrollRatio;

@@ -13,6 +13,8 @@ EditorContainer::EditorContainer(wxWindow* parent)
     verticalScrollBar = new VScroll(this);
 
     Bind(wxEVT_SIZE, &EditorContainer::OnSize, this);
+    Bind(SCROLL_OFFSET_Y_CHANGED, &EditorContainer::OnScrollYOffsetChanged, this);
+    Bind(TRACKS_OFFSET_Y_CHANGED, &EditorContainer::OnTrackYOffsetChanged, this);
 }
 
 EditorContainer::~EditorContainer() 
@@ -34,7 +36,7 @@ void EditorContainer::OnSize(wxSizeEvent& e)
     e.Skip();
 }
 
-void EditorContainer::OnTrackYOffsetChanged()
+void EditorContainer::OnTrackYOffsetChanged(wxCommandEvent& event)
 {    
     verticalScrollBar->SetScrollRatio(GetScrollRatio());
     verticalScrollBar->SetScrollOffset(editorView->GetTracksYOffset()*GetScrollRatio());
@@ -43,7 +45,7 @@ void EditorContainer::OnTrackYOffsetChanged()
     editorView->PostSizeEvent();
 }
 
-void EditorContainer::OnScrollYOffsetChanged()
+void EditorContainer::OnScrollYOffsetChanged(wxCommandEvent& event)
 {
     verticalScrollBar->PostSizeEvent();
 

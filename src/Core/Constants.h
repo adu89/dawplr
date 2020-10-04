@@ -1,4 +1,5 @@
 #pragma once
+
 #include <wx/string.h>
 
 namespace Constants {

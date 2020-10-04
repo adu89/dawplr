@@ -3,6 +3,8 @@
 #include <wx/panel.h>
 #include <wx/window.h>
 
+wxDECLARE_EVENT(TRACK_HEIGHT_CHANGED, wxCommandEvent);
+
 class TrackHeader 
     : public wxPanel 
 {

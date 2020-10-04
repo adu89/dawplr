@@ -3,8 +3,6 @@
 #include "Core/Constants.h"
 #include "Layout/EditorContainer.h"
 
-wxDECLARE_EVENT(SCROLL_OFFSET_Y_CHANGED, wxCommandEvent);
-
 VScroll::VScroll(wxWindow* parent) 
     : wxPanel(parent, wxID_ANY)
     , dragging(false)
@@ -46,9 +44,9 @@ float VScroll::GetScrollOffset()
     return scroller->GetY();
 }
 
-void VScroll::OnScrollYOffsetChanged()
+void VScroll::OnScrollYOffsetChanged(wxCommandEvent& e)
 {
-    static_cast<EditorContainer*>(GetParent())->OnScrollYOffsetChanged();
+    e.Skip();
 }
 
 void VScroll::OnMouseEvent(wxMouseEvent& m) 
@@ -83,7 +81,6 @@ void VScroll::OnMouseEvent(wxMouseEvent& m)
     //     }
     // }
 
-    // m.ResumePropagation(wxEVENT_PROPAGATE_MAX);
     // m.Skip();
 }
 

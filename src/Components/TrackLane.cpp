@@ -53,7 +53,6 @@ void TrackLane::OnPaint(wxPaintEvent&)
 
 void TrackLane::HandleMouseWheelEvent(wxMouseEvent& m) 
 {    
-    m.ResumePropagation(wxEVENT_PROPAGATE_MAX);
     m.Skip();
 }
 

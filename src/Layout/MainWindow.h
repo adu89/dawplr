@@ -1,5 +1,6 @@
+#pragma once
+
 #include "wx/frame.h"
-#include "wx/aui/aui.h"
 
 class MainWindow 
     : public wxFrame 

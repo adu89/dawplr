@@ -35,7 +35,6 @@ void TrackHeader::OnPaint(wxPaintEvent&)
 
 void TrackHeader::HandleMouseWheelEvent(wxMouseEvent& m) 
 {    
-    m.ResumePropagation(wxEVENT_PROPAGATE_MAX);
     m.Skip();
 }
 

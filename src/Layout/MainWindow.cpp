@@ -1,12 +1,14 @@
 #include "MainWindow.h"
-#include "Core/Constants.h"
-#include "MainMenu.h"
-#include "TransportBar.h"
+
 #include <wx/log.h>
 #include <wx/msgdlg.h>
 #include <wx/filedlg.h>
 #include <wx/sizer.h>
 #include <wx/panel.h>
+
+#include "Core/Constants.h"
+#include "MainMenu.h"
+#include "TransportBar.h"
 #include "MainVerticalSplitter.h"
 
 MainWindow::MainWindow()

@@ -1,6 +1,7 @@
 #include "MainMenu.h"
 
 #include <wx/menuitem.h>
+
 #include "core/Constants.h"
 
 MainMenu::MainMenu()

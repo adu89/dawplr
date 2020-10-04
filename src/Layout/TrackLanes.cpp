@@ -34,7 +34,6 @@ void TrackLanes::OnSize(wxSizeEvent& e)
 
 void TrackLanes::HandleMouseWheelEvent(wxMouseEvent& m) 
 {    
-    m.ResumePropagation(wxEVENT_PROPAGATE_MAX);
     m.Skip();
 }
 
