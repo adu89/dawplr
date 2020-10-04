@@ -28,8 +28,6 @@ void TrackLanes::OnSize(wxSizeEvent& e)
         trackLaneRect = wxRect(trackLaneRect.GetBottomLeft() + wxPoint(0, 1), wxSize(clientRect.GetWidth(), 100));
         trackLanes[i]->SetSize(trackLaneRect);
     }
-
-    e.Skip();
 }
 
 void TrackLanes::HandleMouseWheelEvent(wxMouseEvent& m) 

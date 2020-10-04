@@ -32,8 +32,6 @@ void EditorContainer::OnSize(wxSizeEvent& e)
     verticalScrollBar->SetSize(wxRect(wxPoint(clientRect.GetRight() - (SCROLL_BAR_WIDTH-1), 0), wxSize(SCROLL_BAR_WIDTH, clientRect.GetHeight())));
 
     editorView->SetSize(wxRect(clientRect.GetTopLeft(), verticalScrollBar->GetRect().GetBottomLeft() - wxSize(1, 0)));
-
-    e.Skip();
 }
 
 void EditorContainer::OnTrackYOffsetChanged(wxCommandEvent& event)

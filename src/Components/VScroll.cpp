@@ -81,7 +81,7 @@ void VScroll::OnMouseEvent(wxMouseEvent& m)
     //     }
     // }
 
-    // m.Skip();
+     m.Skip();
 }
 
 BEGIN_EVENT_TABLE(VScroll, wxWindow)

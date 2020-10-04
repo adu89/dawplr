@@ -1,5 +1,7 @@
 #include "TrackHeaders.h"
 
+wxDEFINE_EVENT(TRACK_HEIGHT_CHANGED, wxCommandEvent);
+
 TrackHeaders::TrackHeaders(wxWindow* parent)
     : wxPanel(parent, wxID_ANY)
 {
@@ -26,11 +28,7 @@ void TrackHeaders::OnSize(wxSizeEvent& e)
         trackHeaderRect = wxRect(trackHeaderRect.GetBottomLeft() + wxPoint(0, 1), wxSize(clientRect.GetWidth(), 100));
         trackHeaders[i]->SetSize(trackHeaderRect);
     }
-
-    e.Skip();
 }
-
-wxDEFINE_EVENT(TRACK_HEIGHT_CHANGED, wxCommandEvent);
 
 int TrackHeaders::GetHeight() 
 {
