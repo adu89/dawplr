@@ -28,17 +28,6 @@ MainWindow::MainWindow()
     MainVerticalSplitter* mainVerticalSplitter = new MainVerticalSplitter(this);
     mainBoxSizer->Add(mainVerticalSplitter, 1, wxEXPAND);
 
-    // wxSplitterWindow* mainSplitter = new wxSplitterWindow(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxSP_3D);
-    // mainSplitter->SetMinimumPaneSize(100);
-
-    // wxSplitterWindow* splitterWindow = new wxSplitterWindow(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxSP_3D);
-    // splitterWindow->SetMinimumPaneSize(100);
-    // mainBoxSizer->Add(splitterWindow, 1, wxEXPAND);
-
-    // TrackView* trackView = new TrackView(splitterWindow);
-    // BottomPanel* bottomPanel = new BottomPanel(splitterWindow);
-    // splitterWindow->SplitHorizontally(trackView, bottomPanel);
-
     Bind(wxEVT_MENU, &MainWindow::onFileOpen, this, Events::FileOpen);
     Bind(wxEVT_MENU, &MainWindow::onFileNew, this, Events::FileNew);
     Bind(wxEVT_MENU, &MainWindow::onFileSave, this, Events::FileSave);

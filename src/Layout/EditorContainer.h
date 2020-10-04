@@ -6,9 +6,6 @@
 #include "EditorView.h"
 #include "Components/VScroll.h"
 
-wxDECLARE_EVENT(SCROLL_OFFSET_Y_CHANGED, wxCommandEvent);
-wxDECLARE_EVENT(TRACKS_OFFSET_Y_CHANGED, wxCommandEvent);
-
 class EditorContainer 
     : public wxPanel 
 {

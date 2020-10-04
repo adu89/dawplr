@@ -2,6 +2,8 @@
 
 #include "Core/Constants.h"
 
+wxDEFINE_EVENT(V_SASH_DRAGGING, wxCommandEvent);
+
 VSash::VSash(wxWindow* parent) 
     : wxPanel(parent, wxID_ANY)
     , x(Constants::TRACK_HEADER_WIDTH)
@@ -70,7 +72,9 @@ void VSash::OnMouseEvent(wxMouseEvent& m)
 
         if(destination.x <= Constants::TRACK_HEADER_MAX_WIDTH && destination.x >= Constants::TRACK_HEADER_MIN_WIDTH) {
             x = destination.x;
-            SendSizeEventToParent();
+
+            wxCommandEvent event(V_SASH_DRAGGING);
+            wxPostEvent(GetParent(), event);
         }
     }
 

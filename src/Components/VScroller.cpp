@@ -40,7 +40,6 @@ void VScroller::OnMouseEvent(wxMouseEvent& m)
         nextY = wxMin(nextY, GetParent()->GetRect().GetBottom() - GetRect().GetHeight());
 
         y = nextY;
-        //static_cast<VScroll*>(GetParent())->OnScrollYOffsetChanged();
 
         wxCommandEvent event(SCROLL_OFFSET_Y_CHANGED); 
         wxPostEvent(GetParent(), event);

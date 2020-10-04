@@ -5,8 +5,6 @@
 
 #include "VScroller.h"
 
-wxDECLARE_EVENT(SCROLL_OFFSET_Y_CHANGED, wxCommandEvent);
-
 class VScroll 
     : public wxPanel 
 {

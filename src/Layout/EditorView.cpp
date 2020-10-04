@@ -1,7 +1,6 @@
 #include "EditorView.h"
 
 #include "core/Constants.h"
-#include "EditorContainer.h"
 
 wxDEFINE_EVENT(TRACKS_OFFSET_Y_CHANGED, wxCommandEvent);
 
@@ -17,7 +16,8 @@ EditorView::EditorView(wxWindow* parent)
 
     Bind(wxEVT_SIZE, &EditorView::OnSize, this);
     Bind(wxEVT_SCROLLWIN_LINEUP, &EditorView::ScrollUp, this);   
-    Bind(wxEVT_SCROLLWIN_LINEDOWN, &EditorView::ScrollDown, this);   
+    Bind(wxEVT_SCROLLWIN_LINEDOWN, &EditorView::ScrollDown, this);  
+    Bind(V_SASH_DRAGGING, &EditorView::OnVSashDragging, this);
 }
 
 EditorView::~EditorView() 
@@ -45,7 +45,6 @@ void EditorView::ScrollUp(wxScrollWinEvent&)
     if(tracksYOffSet) 
     {
         tracksYOffSet -= wxMin(tracksYOffSet, Constants::SCROLL_SPEED);
-        //static_cast<EditorContainer*>(GetParent())->OnTrackYOffsetChanged();
 
         wxCommandEvent event(TRACKS_OFFSET_Y_CHANGED);
         wxPostEvent(GetParent(), event);
@@ -58,7 +57,6 @@ void EditorView::ScrollDown(wxScrollWinEvent&)
     
     if(tracksYOffSet < maxOffset) {
         tracksYOffSet += wxMin(maxOffset - tracksYOffSet, Constants::SCROLL_SPEED);
-        //static_cast<EditorContainer*>(GetParent())->OnTrackYOffsetChanged();
 
         wxCommandEvent event(TRACKS_OFFSET_Y_CHANGED);
         wxPostEvent(GetParent(), event);
@@ -78,6 +76,11 @@ int EditorView::GetTracksYOffset()
 void EditorView::SetTracksYOffset(int yOffset) 
 {
     tracksYOffSet = yOffset;    
+}
+
+void EditorView::OnVSashDragging(wxCommandEvent&)
+{
+    QueueEvent(new wxSizeEvent);
 }
 
 BEGIN_EVENT_TABLE(EditorView, wxWindow)

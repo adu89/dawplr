@@ -3,6 +3,8 @@
 #include <wx/panel.h>
 #include <wx/window.h>
 
+wxDECLARE_EVENT(V_SASH_DRAGGING, wxCommandEvent);
+
 class VSash 
     : public wxPanel 
 {

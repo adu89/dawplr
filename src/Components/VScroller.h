@@ -3,6 +3,8 @@
 #include <wx/panel.h>
 #include <wx/window.h>
 
+wxDECLARE_EVENT(SCROLL_OFFSET_Y_CHANGED, wxCommandEvent);
+
 class VScroller 
     : public wxPanel {
 public:
