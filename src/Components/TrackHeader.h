@@ -2,6 +2,7 @@
 
 #include <wx/panel.h>
 #include <wx/window.h>
+#include "Components/HSash.h"
 
 wxDECLARE_EVENT(TRACK_HEIGHT_CHANGED, wxCommandEvent);
 
@@ -13,6 +14,13 @@ public:
     ~TrackHeader();    
     void OnPaint(wxPaintEvent&);
     void HandleMouseWheelEvent(wxMouseEvent&);
+    void OnSize(wxSizeEvent&);
+    void OnHSashDragging(wxCommandEvent&);
+    void OnHSashStartDragging(wxCommandEvent&);
+    int GetHeight();
 private:
+    HSash* hSash;
+    int height;
+    int heightOnSashDragStart;
     wxDECLARE_EVENT_TABLE();
 };

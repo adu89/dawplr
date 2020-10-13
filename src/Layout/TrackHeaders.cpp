@@ -1,7 +1,5 @@
 #include "TrackHeaders.h"
 
-wxDEFINE_EVENT(TRACK_HEIGHT_CHANGED, wxCommandEvent);
-
 TrackHeaders::TrackHeaders(wxWindow* parent)
     : wxPanel(parent, wxID_ANY)
 {
@@ -11,6 +9,7 @@ TrackHeaders::TrackHeaders(wxWindow* parent)
     }
 
     Bind(wxEVT_SIZE, &TrackHeaders::OnSize, this);
+    Bind(TRACK_HEIGHT_CHANGED, &TrackHeaders::OnTrackHeightChanged, this);
 }
 
 TrackHeaders::~TrackHeaders()
@@ -25,7 +24,7 @@ void TrackHeaders::OnSize(wxSizeEvent& e)
 
     for(int i = 0; i < trackHeaders.size(); i++)
     {
-        trackHeaderRect = wxRect(trackHeaderRect.GetBottomLeft() + wxPoint(0, 1), wxSize(clientRect.GetWidth(), 100));
+        trackHeaderRect = wxRect(trackHeaderRect.GetBottomLeft() + wxPoint(0, 1), wxSize(clientRect.GetWidth(), trackHeaders[i]->GetHeight()));
         trackHeaders[i]->SetSize(trackHeaderRect);
     }
 }
@@ -45,6 +44,11 @@ int TrackHeaders::GetHeight()
 void TrackHeaders::HandleMouseWheelEvent(wxMouseEvent& m) 
 {    
     m.Skip();
+}
+
+void TrackHeaders::OnTrackHeightChanged(wxCommandEvent& m) 
+{    
+    QueueEvent(new wxSizeEvent);
 }
 
 BEGIN_EVENT_TABLE(TrackHeaders, wxWindow)

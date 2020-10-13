@@ -11,16 +11,15 @@ class VSash
 public:
     VSash(wxWindow*);
     ~VSash();
-    int GetX();
-    void SetX(int);
     int GetWidth();
     void SetWidth(int);
+    int GetX();
+    void SetX(int);
     bool Dragging();
     void OnMouseEvent(wxMouseEvent&);
 
 private:
     int x;
-    int y;
     int width;
     bool dragging;
     wxDECLARE_EVENT_TABLE();

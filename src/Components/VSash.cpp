@@ -27,12 +27,12 @@ void VSash::SetX(int val)
     x = val;
 }
 
-int VSash::GetWidth() 
+int VSash::GetWidth()
 {
-    return width;    
+    return width;
 }
 
-void VSash::SetWidth(int val) 
+void VSash::SetWidth(int val)
 {
     width = val;
 }
