@@ -17,6 +17,7 @@ public:
     void OnTrackYOffsetChanged(wxCommandEvent& event);
     void OnScrollYOffsetChanged(wxCommandEvent& event);
     float GetScrollRatio();
+    void OnTracksHeightChanged(wxCommandEvent& e);
 private:
     EditorView* editorView;
     VScroll* verticalScrollBar;

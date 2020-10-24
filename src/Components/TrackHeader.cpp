@@ -4,14 +4,12 @@
 #include <wx/dcgraph.h>
 #include "Core/Constants.h"
 
-#include <iostream> 
-
-wxDEFINE_EVENT(TRACK_HEIGHT_CHANGED, wxCommandEvent);
+wxDEFINE_EVENT(TRACK_HEADER_HEIGHT_CHANGED, wxCommandEvent);
 
 TrackHeader::TrackHeader(wxWindow* parent, int index) 
     : wxPanel(parent, index)
     , height(Constants::TRACK_HEADER_HEIGHT)
-    , heightOnSashDragStart(0)
+    , index(index)
 {    
     SetBackgroundStyle(wxBG_STYLE_PAINT);
 
@@ -20,8 +18,6 @@ TrackHeader::TrackHeader(wxWindow* parent, int index)
     Bind(wxEVT_PAINT, &TrackHeader::OnPaint, this);
     Bind(wxEVT_SIZE, &TrackHeader::OnSize, this);
     Bind(H_SASH_DRAGGING, &TrackHeader::OnHSashDragging, this);
-    Bind(H_SASH_START_DRAGGING, &TrackHeader::OnHSashStartDragging, this);
-
 }
 
 TrackHeader::~TrackHeader() 
@@ -33,18 +29,21 @@ int TrackHeader::GetHeight()
     return height;
 }
 
+void TrackHeader::SetHeight(int h)
+{
+    height = h;
+}
+
 void TrackHeader::OnHSashDragging(wxCommandEvent& e)
 {
     height = hSash->GetY() + 1;
     
-    wxCommandEvent event(TRACK_HEIGHT_CHANGED);
-    wxPostEvent(GetParent(), event);
-}
+    wxCommandEvent event(TRACK_HEADER_HEIGHT_CHANGED);
 
-void TrackHeader::OnHSashStartDragging(wxCommandEvent& e)
-{
-    heightOnSashDragStart = height;
-    std::cout << "drag_start: " << heightOnSashDragStart << std::endl;
+    event.SetId(index);
+    event.SetInt(height);
+
+    wxPostEvent(GetParent(), event);
 }
 
 void TrackHeader::OnSize(wxSizeEvent& e)

@@ -17,6 +17,7 @@ public:
     int GetHeight();
     void HandleMouseWheelEvent(wxMouseEvent&);
     void OnTrackHeightChanged(wxCommandEvent&);
+    void SetTrackHeight(int index, int height);
 private:
     std::vector<TrackHeader*> trackHeaders;
     wxDECLARE_EVENT_TABLE();

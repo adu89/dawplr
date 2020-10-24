@@ -15,7 +15,7 @@ namespace Constants {
     constexpr int TRACK_HEADER_MAX_WIDTH = 400;
     constexpr int TRACK_LANE_WIDTH = 2000;
     constexpr int TRACK_LANE_HEIGHT = 100;
-    constexpr int SASH_WIDTH = 12;
+    constexpr int SASH_WIDTH = 6;
     constexpr int TRACK_HEADER_MIN_HEIGHT = 50;
     constexpr int TRACK_HEADER_HEIGHT = 100;
     constexpr int TRACK_HEADER_MAX_HEIGHT = 1000;

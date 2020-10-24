@@ -3,6 +3,7 @@
 #include "core/Constants.h"
 
 wxDEFINE_EVENT(TRACKS_OFFSET_Y_CHANGED, wxCommandEvent);
+wxDEFINE_EVENT(TRACKS_HEIGHT_CHANGED, wxCommandEvent);
 
 EditorView::EditorView(wxWindow* parent)
     : wxPanel(parent, wxID_ANY) 
@@ -18,6 +19,8 @@ EditorView::EditorView(wxWindow* parent)
     Bind(wxEVT_SCROLLWIN_LINEUP, &EditorView::ScrollUp, this);   
     Bind(wxEVT_SCROLLWIN_LINEDOWN, &EditorView::ScrollDown, this);  
     Bind(V_SASH_DRAGGING, &EditorView::OnVSashDragging, this);
+    Bind(TRACK_HEADER_HEIGHT_CHANGED, &EditorView::OnTrackHeaderHeightChanged, this);
+    Bind(TRACK_LANE_HEIGHT_CHANGED, &EditorView::OnTrackLaneHeightChanged, this);
 }
 
 EditorView::~EditorView() 
@@ -30,7 +33,7 @@ void EditorView::OnSize(wxSizeEvent& e)
 
     vsash->SetSize(wxRect(vsash->GetX(), clientRect.GetTop(), vsash->GetWidth(), trackHeaders->GetHeight()));
     trackHeaders->SetSize(wxRect(clientRect.GetTopLeft() - wxPoint(0, tracksYOffSet), vsash->GetRect().GetBottomLeft()));
-    trackLanes->SetSize(wxRect(vsash->GetRect().GetTopRight() + wxPoint(0, tracksYOffSet*-1), wxSize(2000, vsash->GetRect().GetHeight())));
+    trackLanes->SetSize(wxRect(vsash->GetRect().GetTopRight() - wxPoint(0, tracksYOffSet), vsash->GetRect().GetBottomRight() + wxPoint(2000, 0)));
 }
 
 void EditorView::HandleMouseWheelEvent(wxMouseEvent& m) 
@@ -79,6 +82,28 @@ void EditorView::SetTracksYOffset(int yOffset)
 void EditorView::OnVSashDragging(wxCommandEvent&)
 {
     QueueEvent(new wxSizeEvent);
+}
+
+void EditorView::OnTrackHeaderHeightChanged(wxCommandEvent& e)
+{
+    trackLanes->SetTrackHeight(e.GetId(), e.GetInt());
+
+    trackHeaders->PostSizeEvent();
+    trackLanes->PostSizeEvent();
+
+    wxCommandEvent event(TRACKS_HEIGHT_CHANGED);
+    wxPostEvent(GetParent(), event);
+}
+
+void EditorView::OnTrackLaneHeightChanged(wxCommandEvent& e)
+{
+    trackHeaders->SetTrackHeight(e.GetId(), e.GetInt());
+
+    trackLanes->PostSizeEvent();
+    trackHeaders->PostSizeEvent();
+
+    wxCommandEvent event(TRACKS_HEIGHT_CHANGED);
+    wxPostEvent(GetParent(), event);
 }
 
 BEGIN_EVENT_TABLE(EditorView, wxWindow)

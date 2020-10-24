@@ -15,6 +15,8 @@ EditorContainer::EditorContainer(wxWindow* parent)
     Bind(wxEVT_SIZE, &EditorContainer::OnSize, this);
     Bind(SCROLL_OFFSET_Y_CHANGED, &EditorContainer::OnScrollYOffsetChanged, this);
     Bind(TRACKS_OFFSET_Y_CHANGED, &EditorContainer::OnTrackYOffsetChanged, this);
+    Bind(TRACKS_HEIGHT_CHANGED, &EditorContainer::OnTracksHeightChanged, this);
+
 }
 
 EditorContainer::~EditorContainer() 
@@ -54,6 +56,14 @@ void EditorContainer::OnScrollYOffsetChanged(wxCommandEvent& event)
 float EditorContainer::GetScrollRatio()
 {
     return static_cast<float>(GetClientRect().GetHeight()) / static_cast<float>(editorView->GetVirtualHeight());
+}
+
+void EditorContainer::OnTracksHeightChanged(wxCommandEvent& e)
+{
+    verticalScrollBar->SetScrollRatio(GetScrollRatio());
+    verticalScrollBar->SetScrollOffset(editorView->GetTracksYOffset() * GetScrollRatio());
+
+    verticalScrollBar->PostSizeEvent();
 }
 
 void EditorContainer::HandleMouseWheelEvent(wxMouseEvent& m) 

@@ -8,6 +8,7 @@
 #include "Components/VSash.h"
 
 wxDECLARE_EVENT(TRACKS_OFFSET_Y_CHANGED, wxCommandEvent);
+wxDECLARE_EVENT(TRACKS_HEIGHT_CHANGED, wxCommandEvent);
 
 class EditorView 
     : public wxPanel 
@@ -23,6 +24,8 @@ public:
     int GetTracksYOffset();
     void SetTracksYOffset(int);
     void OnVSashDragging(wxCommandEvent&);
+    void OnTrackHeaderHeightChanged(wxCommandEvent&);
+    void OnTrackLaneHeightChanged(wxCommandEvent&);
 private:
     int tracksYOffSet;
     TrackHeaders* trackHeaders;
