@@ -31,6 +31,11 @@ TrackHeader::TrackHeader(wxWindow* parent, int index)
     trackNumber->SetMinSize(wxSize(TRACK_NUMBER_WIDTH, -1));
     horizontalBoxSizer->Add(trackNumber, 0, wxALIGN_CENTER_VERTICAL);
 
+    //wxPanel* spacer = new wxPanel(this, wxID_ANY);
+    //spacer->SetBackgroundColour(*wxGREEN);
+    //spacer->SetMinSize(wxSize(1, -1));
+    //horizontalBoxSizer->Add(spacer, 0, wxEXPAND);
+
     wxBoxSizer* verticalBoxSizer = new wxBoxSizer(wxVERTICAL);
     horizontalBoxSizer->Add(verticalBoxSizer, 1);
 
@@ -95,7 +100,7 @@ void TrackHeader::OnSize(wxSizeEvent& e)
 {
     auto clientRect = GetClientRect();
 
-    hSash->SetSize(wxRect(clientRect.GetBottomLeft() - wxPoint(0, 3), clientRect.GetBottomRight()));
+    //hSash->SetSize(wxRect(clientRect.GetBottomLeft() - wxPoint(0, 4), clientRect.GetBottomRight()));
 }
 
 void TrackHeader::OnPaint(wxPaintEvent&)

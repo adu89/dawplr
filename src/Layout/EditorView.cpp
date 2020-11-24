@@ -33,7 +33,7 @@ void EditorView::OnSize(wxSizeEvent& e)
 
     vsash->SetSize(wxRect(vsash->GetX(), clientRect.GetTop(), vsash->GetWidth(), wxMax(trackHeaders->GetHeight(), clientRect.GetHeight())));
     trackHeaders->SetSize(wxRect(clientRect.GetTopLeft() - wxPoint(0, tracksYOffSet), vsash->GetRect().GetBottomLeft() - wxPoint(1, 0)));
-    trackLanes->SetSize(wxRect(vsash->GetRect().GetTopRight() - wxPoint(0, tracksYOffSet), vsash->GetRect().GetBottomRight() + wxPoint(2000, 0)));
+    trackLanes->SetSize(wxRect(vsash->GetRect().GetTopRight() - wxPoint(-1, tracksYOffSet), vsash->GetRect().GetBottomRight() + wxPoint(2000, 0)));
 }
 
 void EditorView::HandleMouseWheelEvent(wxMouseEvent& m) 

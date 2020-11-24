@@ -34,7 +34,7 @@ void HSash::OnPaint(wxPaintEvent&)
 
     gc.DrawRectangle(rect);
 
-    rect.SetY(rect.GetY() - 1);
+    rect.SetY(rect.GetY() + 1);
     rect.SetHeight(rect.GetHeight() - 2);
 
     gc.SetPen(*wxGREY_PEN);
