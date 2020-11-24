@@ -1,5 +1,8 @@
 #include "HSash.h"
 
+#include <wx/dcbuffer.h>
+#include <wx/dcgraph.h>
+
 #include "Core/Constants.h"
 
 wxDEFINE_EVENT(H_SASH_DRAGGING, wxCommandEvent);
@@ -10,11 +13,34 @@ HSash::HSash(wxWindow* parent)
 	, dragging(false)
     , y(0)
 {
-    SetBackgroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_BTNFACE));
+    SetBackgroundColour(*wxLIGHT_GREY);
+
+    Bind(wxEVT_PAINT, &HSash::OnPaint, this);
 }
 
 HSash::~HSash()
 {
+}
+
+void HSash::OnPaint(wxPaintEvent&)
+{
+    wxBufferedPaintDC dc(this);
+    wxGCDC gc(dc);
+
+    wxRect rect = GetClientRect();
+    
+    gc.SetPen(*wxLIGHT_GREY_PEN);
+    gc.SetBrush(*wxLIGHT_GREY_BRUSH);
+
+    gc.DrawRectangle(rect);
+
+    rect.SetY(rect.GetY() - 1);
+    rect.SetHeight(rect.GetHeight() - 2);
+
+    gc.SetPen(*wxGREY_PEN);
+    gc.SetBrush(*wxGREY_BRUSH);
+
+    gc.DrawRectangle(rect);
 }
 
 int HSash::GetY()

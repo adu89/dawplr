@@ -1,9 +1,13 @@
 #include "TrackLanes.h"
 
+#include "Core/TrackManager.h"
+
 TrackLanes::TrackLanes(wxWindow* parent)
     : wxPanel(parent, wxID_ANY)
 {
-    for (int i = 0; i < 10; i++)
+    TrackManager& trackManager = TrackManager::Instance();
+
+    for (int i = 0; i < trackManager.GetTracks().size(); i++)
     {
         trackLanes.push_back(new TrackLane(this, i));
     }

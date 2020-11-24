@@ -1,5 +1,8 @@
 #include "VSash.h"
 
+#include <wx/dcbuffer.h>
+#include <wx/dcgraph.h>
+
 #include "Core/Constants.h"
 
 wxDEFINE_EVENT(V_SASH_DRAGGING, wxCommandEvent);
@@ -10,11 +13,34 @@ VSash::VSash(wxWindow* parent)
     , width(Constants::SASH_WIDTH)
     , dragging(false)
 {    
-    SetBackgroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_BTNFACE));
+    SetBackgroundColour(*wxLIGHT_GREY);
+
+    Bind(wxEVT_PAINT, &VSash::OnPaint, this);
 }
 
 VSash::~VSash()
 {    
+}
+
+void VSash::OnPaint(wxPaintEvent&)
+{
+    wxBufferedPaintDC dc(this);
+    wxGCDC gc(dc);
+
+    wxRect rect = GetClientRect();
+
+    //gc.SetPen(*wxLIGHT_GREY_PEN);
+    //gc.SetBrush(*wxLIGHT_GREY_BRUSH);
+
+    //gc.DrawRectangle(rect);
+
+    //rect.SetX(rect.GetX() - 1);
+    //rect.SetWidth(rect.GetWidth() - 2);
+
+    gc.SetPen(*wxGREY_PEN);
+    gc.SetBrush(*wxGREY_BRUSH);
+
+    gc.DrawRectangle(rect);
 }
 
 int VSash::GetX() 

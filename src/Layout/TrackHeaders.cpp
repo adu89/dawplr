@@ -1,9 +1,13 @@
 #include "TrackHeaders.h"
 
+#include "Core/TrackManager.h"
+
 TrackHeaders::TrackHeaders(wxWindow* parent)
     : wxPanel(parent, wxID_ANY)
 {
-    for(int i = 0; i < 10; i++)
+    TrackManager& trackManager = TrackManager::Instance();
+
+    for(int i = 0; i < trackManager.GetTracks().size(); i++)
     {
         trackHeaders.push_back(new TrackHeader(this, i));
     }

@@ -13,6 +13,7 @@ public:
 	HSash(wxWindow*);
 	~HSash();
 	void OnMouseEvent(wxMouseEvent&);
+	void OnPaint(wxPaintEvent&);
 	int GetY();
 	void SetY(int);
 private:

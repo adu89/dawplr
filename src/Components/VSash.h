@@ -17,6 +17,7 @@ public:
     void SetX(int);
     bool Dragging();
     void OnMouseEvent(wxMouseEvent&);
+    void OnPaint(wxPaintEvent&);
 
 private:
     int x;

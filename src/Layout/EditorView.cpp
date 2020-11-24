@@ -9,7 +9,7 @@ EditorView::EditorView(wxWindow* parent)
     : wxPanel(parent, wxID_ANY) 
     , tracksYOffSet(0)
 {    
-    SetBackgroundColour(*wxYELLOW);
+    SetBackgroundColour(*wxLIGHT_GREY);
 
     trackHeaders = new TrackHeaders(this);
     trackLanes = new TrackLanes(this);
@@ -31,8 +31,8 @@ void EditorView::OnSize(wxSizeEvent& e)
 {    
     auto clientRect = GetClientRect();
 
-    vsash->SetSize(wxRect(vsash->GetX(), clientRect.GetTop(), vsash->GetWidth(), trackHeaders->GetHeight()));
-    trackHeaders->SetSize(wxRect(clientRect.GetTopLeft() - wxPoint(0, tracksYOffSet), vsash->GetRect().GetBottomLeft()));
+    vsash->SetSize(wxRect(vsash->GetX(), clientRect.GetTop(), vsash->GetWidth(), wxMax(trackHeaders->GetHeight(), clientRect.GetHeight())));
+    trackHeaders->SetSize(wxRect(clientRect.GetTopLeft() - wxPoint(0, tracksYOffSet), vsash->GetRect().GetBottomLeft() - wxPoint(1, 0)));
     trackLanes->SetSize(wxRect(vsash->GetRect().GetTopRight() - wxPoint(0, tracksYOffSet), vsash->GetRect().GetBottomRight() + wxPoint(2000, 0)));
 }
 
