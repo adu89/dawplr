@@ -1,12 +1,12 @@
 #include "Track.h"
 
 Track::Track()
-    : name("New Track"), soloed(false), muted(false)
+    : name("New Track"), channels(1), soloed(false), muted(false)
 {
 }
 
-Track::Track(std::string name, bool soloed, bool muted)
-    : name(name), soloed(soloed), muted(muted)
+Track::Track(std::string name, int channels, bool soloed, bool muted)
+    : name(name), channels(2), soloed(soloed), muted(muted)
 {
 }
 
@@ -16,7 +16,17 @@ Track::~Track()
 
 std::string Track::GetName()
 {
-    return std::string();
+    return name;
+}
+
+std::vector<Region>& Track::GetRegions()
+{
+    return std::vector<Region>();
+}
+
+void Track::AddRegion(Region region)
+{
+    regions.push_back(std::move(region));
 }
 
 void Track::SetName(std::string n)

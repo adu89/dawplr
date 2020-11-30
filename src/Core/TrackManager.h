@@ -8,7 +8,7 @@ class TrackManager {
 public:
 	static TrackManager& Instance();
 	const std::vector<Track>& GetTracks();
-	void AddTrack(Track&&);
+	void AddTrack(Track track);
 private:
 	TrackManager();
 	~TrackManager();

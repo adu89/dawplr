@@ -12,9 +12,7 @@ class TrackHeader
 public:
     TrackHeader(wxWindow*, int);
     ~TrackHeader();    
-    void OnPaint(wxPaintEvent&);
     void HandleMouseWheelEvent(wxMouseEvent&);
-    void OnSize(wxSizeEvent&);
     void OnHSashDragging(wxCommandEvent&);
     int GetHeight();
     void SetHeight(int);
