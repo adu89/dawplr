@@ -11,6 +11,9 @@
 #include "TransportBar.h"
 #include "MainVerticalSplitter.h"
 
+#include "Core/TrackManager.h"
+#include "Core/Track.h"
+
 MainWindow::MainWindow()
     : wxFrame(NULL, wxID_ANY, Constants::MAIN_WINDOW_TITLE)
 { 
@@ -106,7 +109,8 @@ void MainWindow::onInsertFile(wxCommandEvent& event)
 
 void MainWindow::onInserTrack(wxCommandEvent& event) 
 {
-    wxLogInfo("onInserTrack");
+    TrackManager& trackManager = TrackManager::Instance();
+    trackManager.AddTrack(Track("test", 2, true, true));
 }
 
 void MainWindow::onSettingsAudioSettings(wxCommandEvent& event) 

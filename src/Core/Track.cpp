@@ -1,10 +1,5 @@
 #include "Track.h"
 
-Track::Track()
-    : name("New Track"), channels(1), soloed(false), muted(false)
-{
-}
-
 Track::Track(std::string name, int channels, bool soloed, bool muted)
     : name(name), channels(2), soloed(soloed), muted(muted)
 {

@@ -26,6 +26,7 @@ public:
     void OnVSashDragging(wxCommandEvent&);
     void OnTrackHeaderHeightChanged(wxCommandEvent&);
     void OnTrackLaneHeightChanged(wxCommandEvent&);
+    void OnTrackListChanged(wxCommandEvent&);
 private:
     int tracksYOffSet;
     TrackHeaders* trackHeaders;

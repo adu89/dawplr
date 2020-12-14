@@ -12,12 +12,16 @@ TrackLanes::TrackLanes(wxWindow* parent)
         trackLanes.push_back(new TrackLane(this, i));
     }
 
+    trackManager.AddListener(this);
+
     Bind(wxEVT_SIZE, &TrackLanes::OnSize, this);
     Bind(TRACK_LANE_HEIGHT_CHANGED, &TrackLanes::OnTrackHeightChanged, this);
 }
 
 TrackLanes::~TrackLanes()
 {
+    TrackManager& trackManager = TrackManager::Instance();
+    trackManager.RemoveListener(this);
 }
 
 void TrackLanes::OnSize(wxSizeEvent& e) 
@@ -58,6 +62,12 @@ void TrackLanes::HandleMouseWheelEvent(wxMouseEvent& m)
 void TrackLanes::OnTrackHeightChanged(wxCommandEvent& m)
 {
     m.Skip();
+}
+
+void TrackLanes::OnAddTrack(const Track& t)
+{
+    trackLanes.push_back(new TrackLane(this, trackLanes.size()));
+    this->PostSizeEvent();
 }
 
 BEGIN_EVENT_TABLE(TrackLanes, wxWindow)

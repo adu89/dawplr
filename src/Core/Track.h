@@ -9,7 +9,6 @@
 class Track 
 {
 public:
-	Track();
 	Track(std::string, int, bool, bool); 
 	~Track();
 	std::string GetName();

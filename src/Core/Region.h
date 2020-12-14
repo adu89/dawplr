@@ -11,5 +11,4 @@ private:
 	std::string name;
 	int startTime;
 	int endTime;
-	float** samples;
 };

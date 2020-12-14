@@ -14,10 +14,11 @@ public:
     ~EditorContainer();    
     void OnSize(wxSizeEvent&);
     void HandleMouseWheelEvent(wxMouseEvent&);
-    void OnTrackYOffsetChanged(wxCommandEvent& event);
-    void OnScrollYOffsetChanged(wxCommandEvent& event);
+    void OnTrackYOffsetChanged(wxCommandEvent&);
+    void OnScrollYOffsetChanged(wxCommandEvent&);
     float GetScrollRatio();
-    void OnTracksHeightChanged(wxCommandEvent& e);
+    void OnTracksHeightChanged(wxCommandEvent&);
+    void OnTrackListChanged(wxCommandEvent&);
 private:
     EditorView* editorView;
     VScroll* verticalScrollBar;

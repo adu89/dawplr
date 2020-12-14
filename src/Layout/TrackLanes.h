@@ -6,9 +6,11 @@
 #include <vector>
 
 #include "Components/TrackLane.h"
+#include "Core/TrackManager.h"
 
 class TrackLanes 
     : public wxPanel 
+    , public TrackManager::Listener
 {
 public:
     TrackLanes(wxWindow*);
@@ -18,6 +20,7 @@ public:
     void SetTrackHeight(int index, int height);
     void HandleMouseWheelEvent(wxMouseEvent&); 
     void OnTrackHeightChanged(wxCommandEvent&);
+    void OnAddTrack(const Track& t) override;
 private:
     std::vector<TrackLane*> trackLanes;    
     wxDECLARE_EVENT_TABLE();

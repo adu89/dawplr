@@ -21,6 +21,7 @@ EditorView::EditorView(wxWindow* parent)
     Bind(V_SASH_DRAGGING, &EditorView::OnVSashDragging, this);
     Bind(TRACK_HEADER_HEIGHT_CHANGED, &EditorView::OnTrackHeaderHeightChanged, this);
     Bind(TRACK_LANE_HEIGHT_CHANGED, &EditorView::OnTrackLaneHeightChanged, this);
+    Bind(TRACK_LIST_CHANGED, &EditorView::OnTrackListChanged, this);
 }
 
 EditorView::~EditorView() 
@@ -104,6 +105,11 @@ void EditorView::OnTrackLaneHeightChanged(wxCommandEvent& e)
 
     wxCommandEvent event(TRACKS_HEIGHT_CHANGED);
     wxPostEvent(GetParent(), event);
+}
+
+void EditorView::OnTrackListChanged(wxCommandEvent& e)
+{
+    e.Skip();
 }
 
 BEGIN_EVENT_TABLE(EditorView, wxWindow)

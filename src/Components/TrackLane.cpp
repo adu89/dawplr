@@ -56,15 +56,16 @@ void TrackLane::OnSize(wxSizeEvent& e)
 
 void TrackLane::OnPaint(wxPaintEvent&)
 {
+    auto currentBpm = 120;
+
     wxBufferedPaintDC dc(this);
     wxGCDC gc(dc);
 
     wxRect rect = GetClientRect();
 
-    auto currentBpm = 120;
-    auto note = 2;
-    auto pixelsPerBeat = 100;
-    auto slice = pixelsPerBeat / note;
+    //auto note = 2;
+    //auto pixelsPerBeat = 100;
+    //auto slice = pixelsPerBeat / note;
 
     gc.SetPen(*wxLIGHT_GREY_PEN);
     gc.SetBrush(*wxLIGHT_GREY_BRUSH);

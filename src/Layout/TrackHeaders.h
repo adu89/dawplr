@@ -6,9 +6,13 @@
 #include <vector>
 
 #include "Components/TrackHeader.h"
+#include "Core/TrackManager.h"
+
+wxDECLARE_EVENT(TRACK_LIST_CHANGED, wxCommandEvent);
 
 class TrackHeaders 
     : public wxPanel 
+    , public TrackManager::Listener
 {
 public:
     TrackHeaders(wxWindow*);
@@ -18,6 +22,8 @@ public:
     void HandleMouseWheelEvent(wxMouseEvent&);
     void OnTrackHeightChanged(wxCommandEvent&);
     void SetTrackHeight(int index, int height);
+
+    void OnAddTrack(const Track& t) override;
 private:
     std::vector<TrackHeader*> trackHeaders;
     wxDECLARE_EVENT_TABLE();
