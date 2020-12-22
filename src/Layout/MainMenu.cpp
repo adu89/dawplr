@@ -2,7 +2,7 @@
 
 #include <wx/menuitem.h>
 
-#include "core/Constants.h"
+#include "Core/Constants.h"
 
 MainMenu::MainMenu()
 {

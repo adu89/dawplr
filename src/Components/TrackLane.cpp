@@ -2,6 +2,7 @@
 
 #include <wx/dcbuffer.h>
 #include <wx/dcgraph.h>
+
 #include "Core/Constants.h"
 
 wxDEFINE_EVENT(TRACK_LANE_HEIGHT_CHANGED, wxCommandEvent);

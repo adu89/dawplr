@@ -2,6 +2,7 @@
 
 #include <wx/panel.h>
 #include <wx/window.h>
+
 #include "Components/HSash.h"
 
 wxDECLARE_EVENT(TRACK_HEADER_HEIGHT_CHANGED, wxCommandEvent);

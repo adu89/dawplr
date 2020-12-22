@@ -7,11 +7,12 @@
 #include <wx/textctrl.h>
 #include <wx/tglbtn.h>
 #include <wx/gauge.h>
-#include <string>  
-#include "Core/Constants.h"
-#include "Components/HMeter.h"
 
+#include <string>  
+
+#include "Core/Constants.h"
 #include "Core/TrackManager.h"
+#include "Components/HMeter.h"
 
 wxDEFINE_EVENT(TRACK_HEADER_HEIGHT_CHANGED, wxCommandEvent);
 

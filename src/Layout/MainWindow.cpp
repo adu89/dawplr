@@ -7,12 +7,11 @@
 #include <wx/panel.h>
 
 #include "Core/Constants.h"
+#include "Core/TrackManager.h"
+#include "Core/Track.h"
 #include "MainMenu.h"
 #include "TransportBar.h"
 #include "MainVerticalSplitter.h"
-
-#include "Core/TrackManager.h"
-#include "Core/Track.h"
 
 MainWindow::MainWindow()
     : wxFrame(NULL, wxID_ANY, Constants::MAIN_WINDOW_TITLE)

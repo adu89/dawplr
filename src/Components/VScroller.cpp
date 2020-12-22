@@ -1,4 +1,5 @@
 #include "VScroller.h"
+
 #include "VScroll.h"
 
 wxDEFINE_EVENT(SCROLL_OFFSET_Y_CHANGED, wxCommandEvent);
