@@ -5,10 +5,13 @@
 #include <wx/filedlg.h>
 #include <wx/sizer.h>
 #include <wx/panel.h>
+#include <wx/textdlg.h>
+#include <AudioFile.h>
 
 #include "Core/Constants.h"
 #include "Core/TrackManager.h"
 #include "Core/Track.h"
+#include "Core/Region.h"
 #include "MainMenu.h"
 #include "TransportBar.h"
 #include "MainVerticalSplitter.h"
@@ -53,7 +56,7 @@ MainWindow::~MainWindow()
 void MainWindow::onFileOpen(wxCommandEvent& event) 
 {
     wxFileDialog openFileDialog(this, "Open a session", "", "", "Dawplr session files (*.dwp)|*.dwp", wxFD_OPEN | wxFD_FILE_MUST_EXIST);
-	openFileDialog.Centre(wxBOTH);
+	openFileDialog.Center(wxBOTH);
 
 	if (openFileDialog.ShowModal() == wxID_OK)
     {
@@ -102,14 +105,26 @@ void MainWindow::onInsertFile(wxCommandEvent& event)
 
 	if (insertFileDialog.ShowModal() == wxID_OK)
     {
-        wxLogInfo("onFileOpen");
+        AudioFile<float> file;
+        file.load(insertFileDialog.GetPath());
+
+        TrackManager& trackManager = TrackManager::Instance();
+        Track track = Track(insertFileDialog.GetFilename(), file.getNumChannels(), false, false);
+        long size = file.samples[0].size();
+        track.AddRegion(Region(insertFileDialog.GetFilename(), 0, size, std::move(file)));
+        trackManager.AddTrack(std::move(track));
     }
 }
 
 void MainWindow::onInserTrack(wxCommandEvent& event) 
 {
-    TrackManager& trackManager = TrackManager::Instance();
-    trackManager.AddTrack(Track("test", 2, true, true));
+    wxTextEntryDialog textEntryDialog(this, "Track name", "Insert track");
+
+    if (textEntryDialog.ShowModal() == wxID_OK)
+    {
+        TrackManager& trackManager = TrackManager::Instance();
+        trackManager.AddTrack(Track(textEntryDialog.GetValue(), 2, true, true));
+    }
 }
 
 void MainWindow::onSettingsAudioSettings(wxCommandEvent& event) 

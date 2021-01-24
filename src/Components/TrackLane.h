@@ -2,7 +2,9 @@
 
 #include <wx/panel.h>
 #include <wx/window.h>
+#include <vector>
 
+#include "Components/RegionArea.h"
 #include "Components/HSash.h"
 
 wxDECLARE_EVENT(TRACK_LANE_HEIGHT_CHANGED, wxCommandEvent);

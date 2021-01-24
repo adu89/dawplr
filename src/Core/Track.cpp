@@ -14,9 +14,9 @@ std::string Track::GetName()
     return name;
 }
 
-std::vector<Region>& Track::GetRegions()
+ std::vector<Region>& Track::GetRegions()
 {
-    return std::vector<Region>();
+     return regions;
 }
 
 void Track::AddRegion(Region region)

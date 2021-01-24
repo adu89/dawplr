@@ -1,14 +1,17 @@
 #pragma once
 
-#include <string>			
+#include <string>		
+#include <AudioFile.h>
 
 class Region
 {
 public:
-	Region(std::string name, int startTime, int endTime);
+	Region(std::string name, long startSample, long endSample, AudioFile<float> audioFile);
 	~Region();
+	AudioFile<float>& GetAudioData();
 private:
 	std::string name;
-	int startTime;
-	int endTime;
+	long startSample;
+	long endSample;
+	AudioFile<float> audioFile;
 };

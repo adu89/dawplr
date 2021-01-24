@@ -6,7 +6,7 @@ TrackManager& TrackManager::Instance()
 	return trackManager;
 }
 
-const std::vector<Track>& TrackManager::GetTracks()
+std::vector<Track>& TrackManager::GetTracks()
 {
 	return tracks;
 }
@@ -15,7 +15,6 @@ void TrackManager::AddTrack(Track track)
 {
 	tracks.push_back(std::move(track));
 	listeners.Call([&](Listener* l) { l->OnAddTrack(tracks[tracks.size() - 1]);  });
-
 }
 
 void TrackManager::AddListener(Listener* l)

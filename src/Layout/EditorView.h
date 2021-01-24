@@ -5,6 +5,7 @@
 
 #include "TrackHeaders.h"
 #include "TrackLanes.h"
+#include "TrackLanesContainer.h"
 #include "Components/VSash.h"
 
 wxDECLARE_EVENT(TRACKS_OFFSET_Y_CHANGED, wxCommandEvent);
@@ -27,10 +28,15 @@ public:
     void OnTrackHeaderHeightChanged(wxCommandEvent&);
     void OnTrackLaneHeightChanged(wxCommandEvent&);
     void OnTrackListChanged(wxCommandEvent&);
+    void OnTrackXOffsetChanged(wxCommandEvent&);
+    int GetTrackLanesVirtualWidth();
+    int GetTrackLanesXOffset();
+    void SetTrackLanesXOffset(int);
+    int GetTrackLanesContainerWidth();
 private:
     int tracksYOffSet;
     TrackHeaders* trackHeaders;
-    TrackLanes* trackLanes;
+    TrackLanesContainer* trackLanesContainer;
     VSash* vsash;
     wxDECLARE_EVENT_TABLE();
 };

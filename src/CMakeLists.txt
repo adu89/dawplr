@@ -30,6 +30,7 @@ target_link_libraries(Dawplr PUBLIC
     zlib$<$<CONFIG:DEBUG>:d>
     comctl32
     Rpcrt4
+    AudioFile
 )
 
 target_sources(

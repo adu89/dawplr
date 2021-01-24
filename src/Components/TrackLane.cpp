@@ -4,6 +4,7 @@
 #include <wx/dcgraph.h>
 
 #include "Core/Constants.h"
+#include "Core//TrackManager.h"
 
 wxDEFINE_EVENT(TRACK_LANE_HEIGHT_CHANGED, wxCommandEvent);
 
@@ -57,39 +58,70 @@ void TrackLane::OnSize(wxSizeEvent& e)
 
 void TrackLane::OnPaint(wxPaintEvent&)
 {
-    auto currentBpm = 120;
-
-    wxBufferedPaintDC dc(this);
-    wxGCDC gc(dc);
+    TrackManager& trackManager = TrackManager::Instance();
+    Track& track = trackManager.GetTracks().at(index);
 
     wxRect rect = GetClientRect();
 
-    //auto note = 2;
-    //auto pixelsPerBeat = 100;
-    //auto slice = pixelsPerBeat / note;
+    wxBufferedPaintDC dc(this);
+    wxGCDC gc(dc);
 
     gc.SetPen(*wxLIGHT_GREY_PEN);
     gc.SetBrush(*wxLIGHT_GREY_BRUSH);
 
     gc.DrawRectangle(rect);
 
-    //gc.SetPen(*wxMEDIUM_GREY_PEN);
-    //gc.SetBrush(*wxMEDIUM_GREY_BRUSH);
+    gc.SetPen(*wxRED_PEN);
 
-    //wxRect beatRect = wxRect(rect.GetTopLeft(), wxSize(slice, rect.GetHeight()));
+    int currentBpm = 120;
+    double pixelsPerBeat = 50.0;
 
-    //do 
-    //{
-    //    gc.DrawRectangle(beatRect.GetTopRight(), wxSize(2, rect.GetHeight()));
-    //    beatRect.Offset(slice, 0);
-    //} while (beatRect.GetRight() < rect.GetRight());
+    for (Region& r : track.GetRegions())
+    {
+        double beats = r.GetAudioData().getLengthInSeconds() * (currentBpm / 60);
+        int pixels = wxRound(beats * pixelsPerBeat);
+        int samplesPerPixel = wxRound(r.GetAudioData().getNumSamplesPerChannel() / pixels);
 
-    //gc.DrawRectangle(rect.GetBottomLeft() - wxSize(0, 1), wxSize(rect.GetWidth(), 2));
+        gc.DrawRectangle(wxRect(0, 0, pixels, rect.GetHeight() - hSash->GetSize().GetHeight()));
 
-    //gc.SetPen(wxColour(50, 205, 50, 255));
-    //gc.SetBrush(wxColour(50, 205, 50, 100));
+        double half = rect.GetHeight() / 2;
 
-    //gc.DrawRoundedRectangle(rect.GetTopLeft() + wxSize(4, 4), wxSize(rect.GetWidth() - 8, rect.GetHeight() - 10), 4);    
+        gc.SetPen(*wxBLUE_PEN);
+
+        gc.SetAxisOrientation(true, true);
+        gc.SetDeviceOrigin(0, half);
+
+        int totalSamples = r.GetAudioData().getNumSamplesPerChannel();
+        auto& samples = r.GetAudioData().samples;
+
+        for (int pixel = 0; pixel < pixels; pixel++)
+        {
+            int startIndex = pixel * samplesPerPixel;
+            int endIndex = wxMin(startIndex + samplesPerPixel, totalSamples);
+
+            float positiveMax = -1;
+            float negativeMax = 1;
+
+            for (int sampleIndex = startIndex; sampleIndex < endIndex; sampleIndex++)
+            {
+                float currentSample = samples[0][sampleIndex];
+
+                if (currentSample > 0)
+                {
+                    positiveMax = currentSample > positiveMax ? currentSample : positiveMax;
+                }
+                else
+                {
+                    negativeMax = currentSample < negativeMax ? currentSample : negativeMax;
+                }
+            }
+
+            gc.DrawLine(wxRealPoint(pixel, wxMax(positiveMax * half, .5)), wxRealPoint(pixel, wxMin(negativeMax * half, -.5)));
+
+            positiveMax = -1;
+            negativeMax = 1;
+        }
+    }
 }
 
 void TrackLane::HandleMouseWheelEvent(wxMouseEvent& m) 

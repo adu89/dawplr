@@ -10,9 +10,7 @@ bool Dawplr::OnInit()
 
     Track t = Track("Accoustic Guitar", 2, false, false);
 
-    t.AddRegion(Region("1", 0, 1000));
-
-    trackManager.AddTrack(t);
+    trackManager.AddTrack(std::move(t));
 
     MainWindow* mainWindow = new MainWindow();
 
