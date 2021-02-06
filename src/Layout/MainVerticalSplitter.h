@@ -9,4 +9,6 @@ class MainVerticalSplitter
 public:
     MainVerticalSplitter(wxWindow* parent);
     ~MainVerticalSplitter() override;
+
+    bool OnSashPositionChange(int) override;
 };

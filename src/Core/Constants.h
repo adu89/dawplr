@@ -8,7 +8,11 @@ namespace Constants {
     const wxString MAIN_WINDOW_TITLE = "Dawplr";
     constexpr int TRANSPORT_BAR_HEIGHT = 80;
     constexpr int SPLITTER_MIN_WIDTH = 100;
+
+    constexpr int INSPECTOR_VIEW_MIN_WIDTH = 100;
     constexpr int INSPECTOR_VIEW_WIDTH = 200;
+    constexpr int INSPECTOR_VIEW_MAX_WIDTH = 400;
+
     constexpr int BOTTOM_PANEL_WIDTH = 200;
     constexpr int TRACK_HEADER_MIN_WIDTH = 100;    
     constexpr int TRACK_HEADER_WIDTH = 200;

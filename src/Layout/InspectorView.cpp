@@ -6,6 +6,8 @@
 InspectorView::InspectorView(wxWindow* parent)
     : wxPanel(parent, wxID_ANY)
 {
+    SetBackgroundColour(*wxWHITE);
+
     wxStaticText* text = new wxStaticText(this, wxID_ANY, "Inspector View");
 
     wxBoxSizer* mainBoxSizer = new wxBoxSizer(wxHORIZONTAL);

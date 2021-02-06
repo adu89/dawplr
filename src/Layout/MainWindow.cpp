@@ -28,7 +28,7 @@ MainWindow::MainWindow()
     TransportBar* transportBar = new TransportBar(this);
     mainBoxSizer->Add(transportBar, 1, wxEXPAND);
 
-    mainBoxSizer->AddSpacer(20);
+    mainBoxSizer->AddSpacer(4);
 
     MainVerticalSplitter* mainVerticalSplitter = new MainVerticalSplitter(this);
     mainBoxSizer->Add(mainVerticalSplitter, 1, wxEXPAND);
