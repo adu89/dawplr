@@ -1,25 +1,15 @@
 #pragma once
 
-#include <wx/scrolwin.h>
+
 #include <wx/window.h>
 #include <wx/dc.h>
 
-#include <vector>
-
-#include "EditorAreaLeft.h";
+#include "Components/SyncedScrollWindow.h"
 
 class EditorAreaRight
-	: public wxScrolledWindow
+	: public SyncedScrolledWindow
 {
 public:
-	EditorAreaRight(wxWindow*, EditorAreaLeft*);
+	EditorAreaRight(wxWindow*);
 	~EditorAreaRight();
-
-	//void OnDraw(wxDC&) override;
-	void OnScrollUp(wxScrollWinEvent&);
-	void OnScrollDown(wxScrollWinEvent&);
-	void OnSize(wxSizeEvent&);
-private:
-	EditorAreaLeft* editorAreaLeft;
-	int lastYScrollPos;
 };

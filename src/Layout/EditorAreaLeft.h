@@ -1,17 +1,17 @@
 #pragma once
 
-#include <wx/panel.h>
 #include <wx/window.h>
-#include <wx/dc.h>
+#include <wx/panel.h>
+
+#include "TrackHeaderArea.h"
 
 class EditorAreaLeft
 	: public wxPanel
 {
 public:
-	EditorAreaLeft(wxWindow* parent);
+	EditorAreaLeft(wxWindow*);
 	~EditorAreaLeft();
-	void OnPaint(wxPaintEvent&);
-	void SetSrcY(int);
+	TrackHeaderArea* GetTrackHeaderArea();
 private:
-	int srcY;
+	TrackHeaderArea* trackHeaderArea;
 };

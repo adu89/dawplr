@@ -1,12 +1,11 @@
-#include "EditorAreaRight.h"
+#include "TrackHeaderArea.h"
 
-#include <wx/log.h>
 #include <wx/gbsizer.h>
 
 #include "Components/TrackBody.h"
 
-EditorAreaRight::EditorAreaRight(wxWindow* parent)
-	: SyncedScrolledWindow(parent)
+TrackHeaderArea::TrackHeaderArea(wxWindow* parent)
+    : SyncedScrolledWindow(parent)
 {
 	wxGridBagSizer* gbSizer = new wxGridBagSizer(0, 0);
 
@@ -20,19 +19,10 @@ EditorAreaRight::EditorAreaRight(wxWindow* parent)
 	SetSizer(gbSizer);
 	FitInside();
 	SetScrollRate(10, 10);
+
+    DoShowScrollbars(wxSHOW_SB_NEVER, wxSHOW_SB_NEVER);
 }
 
-EditorAreaRight::~EditorAreaRight()
+TrackHeaderArea::~TrackHeaderArea()
 {
 }
-
-// void EditorAreaRight::OnSize(wxSizeEvent&)
-// {
-// 	for (auto child : GetChildren())
-// 	{
-// 		TrackBody* trackBody = static_cast<TrackBody*>(child);
-// 	}
-
-// 	Layout();
-// 	AdjustScrollbars();
-// }

@@ -11,8 +11,8 @@ public:
 	~TrackBody();
 	int GetVirtualHeight();
 	int GetVirtualWidth();
-	void OnPaint(wxPaintEvent&);
 private:
+	void onSashDragging(wxCommandEvent&);
 	int virtualHeight;
 	int virtualWidth;
 	int index;

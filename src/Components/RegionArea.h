@@ -9,4 +9,5 @@ class RegionArea
 public:
 	RegionArea(wxWindow* parent);
 	~RegionArea();
+	void OnPaint(wxPaintEvent&);
 };

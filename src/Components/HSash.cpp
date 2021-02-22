@@ -6,41 +6,17 @@
 #include "Core/Constants.h"
 
 wxDEFINE_EVENT(H_SASH_DRAGGING, wxCommandEvent);
-wxDEFINE_EVENT(H_SASH_START_DRAGGING, wxCommandEvent);
 
 HSash::HSash(wxWindow* parent)
 	: wxPanel(parent, wxID_ANY)
 	, dragging(false)
     , y(0)
 {
-    SetBackgroundColour(*wxLIGHT_GREY);
-
-    Bind(wxEVT_PAINT, &HSash::OnPaint, this);
+    SetMinSize(wxSize(-1, Constants::SASH_HEIGHT));
 }
 
 HSash::~HSash()
 {
-}
-
-void HSash::OnPaint(wxPaintEvent&)
-{
-    wxBufferedPaintDC dc(this);
-    wxGCDC gc(dc);
-
-    wxRect rect = GetClientRect();
-    
-    gc.SetPen(*wxLIGHT_GREY_PEN);
-    gc.SetBrush(*wxLIGHT_GREY_BRUSH);
-
-    gc.DrawRectangle(rect);
-
-    rect.SetY(rect.GetY() + 1);
-    rect.SetHeight(rect.GetHeight() - 2);
-
-    gc.SetPen(*wxGREY_PEN);
-    gc.SetBrush(*wxGREY_BRUSH);
-
-    gc.DrawRectangle(rect);
 }
 
 int HSash::GetY()
@@ -66,9 +42,6 @@ void HSash::OnMouseEvent(wxMouseEvent& m)
         SetCursor(wxCURSOR_SIZENS);
         CaptureMouse();
         dragging = true;
-
-        wxCommandEvent event(H_SASH_START_DRAGGING);
-        wxPostEvent(GetParent(), event);
     }
 
     if (m.LeftUp())
@@ -88,6 +61,7 @@ void HSash::OnMouseEvent(wxMouseEvent& m)
             y = destination.y;
         
             wxCommandEvent event(H_SASH_DRAGGING);
+            event.SetInt(y + Constants::SASH_HEIGHT);
             wxPostEvent(GetParent(), event);
         }
     }
