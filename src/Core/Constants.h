@@ -23,7 +23,7 @@ namespace Constants {
     constexpr int SASH_HEIGHT = 4; 
     constexpr int TRACK_HEADER_MIN_HEIGHT = 50;
     constexpr int TRACK_HEADER_HEIGHT = 100;
-    constexpr int TRACK_HEADER_MAX_HEIGHT = 1000;
+    constexpr int TRACK_HEADER_MAX_HEIGHT = 200;
     constexpr int SCROLL_BAR_WIDTH = 12;
     constexpr int SCROLL_BAR_INNER_WIDTH = 8;
     constexpr int SCROLL_SPEED = 10;

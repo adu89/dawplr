@@ -85,14 +85,14 @@ void TrackHeader::SetHeight(int h)
 
 void TrackHeader::OnHSashDragging(wxCommandEvent& e)
 {
-    height = hSash->GetY() + 1;
+    // height = hSash->GetY() + 1;
     
-    wxCommandEvent event(TRACK_HEADER_HEIGHT_CHANGED);
+    // wxCommandEvent event(TRACK_HEADER_HEIGHT_CHANGED);
 
-    event.SetId(index);
-    event.SetInt(height);
+    // event.SetId(index);
+    // event.SetInt(height);
 
-    wxPostEvent(GetParent(), event);
+    // wxPostEvent(GetParent(), event);
 }
 
 void TrackHeader::HandleMouseWheelEvent(wxMouseEvent& m) 

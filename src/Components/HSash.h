@@ -12,10 +12,11 @@ public:
 	HSash(wxWindow*);
 	~HSash();
 	void OnMouseEvent(wxMouseEvent&);
-	int GetY();
-	void SetY(int);
+	// int GetY();
+	// void SetY(int);
 private:
 	bool dragging;
-	int y;
+	void onPaint(wxPaintEvent&);
+	// int y;
 	wxDECLARE_EVENT_TABLE();
 };

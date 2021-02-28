@@ -38,14 +38,14 @@ void TrackLane::SetHeight(int h)
 
 void TrackLane::OnHSashDragging(wxCommandEvent& e)
 {
-    height = hSash->GetY() + 1;
+    // height = hSash->GetY() + 1;
 
-    wxCommandEvent event(TRACK_LANE_HEIGHT_CHANGED);
+    // wxCommandEvent event(TRACK_LANE_HEIGHT_CHANGED);
 
-    event.SetId(index);
-    event.SetInt(height);
+    // event.SetId(index);
+    // event.SetInt(height);
 
-    wxPostEvent(GetParent(), event);
+    // wxPostEvent(GetParent(), event);
 }
 
 void TrackLane::OnSize(wxSizeEvent& e)

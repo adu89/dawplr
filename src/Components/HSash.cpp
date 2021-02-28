@@ -10,24 +10,45 @@ wxDEFINE_EVENT(H_SASH_DRAGGING, wxCommandEvent);
 HSash::HSash(wxWindow* parent)
 	: wxPanel(parent, wxID_ANY)
 	, dragging(false)
-    , y(0)
+    // , y(0)
 {
     SetMinSize(wxSize(-1, Constants::SASH_HEIGHT));
+
+    Bind(wxEVT_PAINT, &HSash::onPaint, this);
 }
 
 HSash::~HSash()
 {
 }
 
-int HSash::GetY()
+
+void HSash::onPaint(wxPaintEvent&)
 {
-    return y;
+    wxBufferedPaintDC dc(this);
+
+    dc.SetPen(*wxBLACK_PEN);
+    dc.SetBrush(*wxBLACK_BRUSH);
+
+    // if (index % 2 == 0) {
+    //     dc.SetPen(*wxGREEN_PEN);
+    //     dc.SetBrush(*wxGREEN_BRUSH);
+    // }
+
+    dc.DrawRectangle(GetUpdateRegion().GetBox());
+
+    //auto x = this->GetUpdateRegion().GetBox();
+    //dc.DrawText(wxString("Track: " + wxString(std::to_string(index))), x.GetTopLeft());
 }
 
-void HSash::SetY(int newY)
-{
-    y = newY;
-}
+// int HSash::GetY()
+// {
+//     return y;
+// }
+
+// void HSash::SetY(int newY)
+// {
+//     y = newY;
+// }
 
 void HSash::OnMouseEvent(wxMouseEvent& m)
 {
@@ -56,14 +77,10 @@ void HSash::OnMouseEvent(wxMouseEvent& m)
         wxPoint mouseOnScreen = wxGetMousePosition();
 
         auto destination = GetParent()->ScreenToClient(mouseOnScreen);
-
-        if (destination.y <= Constants::TRACK_HEADER_MAX_HEIGHT && destination.y >= Constants::TRACK_HEADER_MIN_HEIGHT) {
-            y = destination.y;
-        
-            wxCommandEvent event(H_SASH_DRAGGING);
-            event.SetInt(y + Constants::SASH_HEIGHT);
-            wxPostEvent(GetParent(), event);
-        }
+    
+        wxCommandEvent event(H_SASH_DRAGGING);
+        event.SetInt(destination.y);
+        wxPostEvent(GetParent(), event);
     }
 
     m.Skip();

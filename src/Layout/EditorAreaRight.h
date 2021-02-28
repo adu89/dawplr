@@ -4,6 +4,7 @@
 #include <wx/window.h>
 #include <wx/dc.h>
 
+#include "Components/TrackBody.h"
 #include "Components/SyncedScrollWindow.h"
 
 class EditorAreaRight
@@ -12,4 +13,6 @@ class EditorAreaRight
 public:
 	EditorAreaRight(wxWindow*);
 	~EditorAreaRight();
+private:
+	void onTrackBodyHeightChanged(TrackBodyHeightChangedEvent&);
 };

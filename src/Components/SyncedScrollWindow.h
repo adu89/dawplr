@@ -34,6 +34,9 @@ public:
 
         wxWindow::ScrollWindow(x, y, rect);
     }
+protected:
+    SyncedScrolledWindow* otherWindow;
+    
 private:
     void DoSync()
     {
@@ -47,6 +50,5 @@ private:
         }
     };
 
-    SyncedScrolledWindow* otherWindow;
     bool isSyncing;
 };

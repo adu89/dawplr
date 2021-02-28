@@ -3,17 +3,20 @@
 #include <wx/panel.h>
 #include <wx/window.h>
 
+#include "Events/TrackBodyHeightChangedEvent.h"
+
+class HSash;
+class RegionArea;
+
 class TrackBody
 	: public wxPanel 
 {
 public:
 	TrackBody(wxWindow*, int);
 	~TrackBody();
-	int GetVirtualHeight();
-	int GetVirtualWidth();
 private:
 	void onSashDragging(wxCommandEvent&);
-	int virtualHeight;
-	int virtualWidth;
-	int index;
+	void onSize(wxSizeEvent&);
+	HSash* hSash;
+	RegionArea* regionArea;
 };
