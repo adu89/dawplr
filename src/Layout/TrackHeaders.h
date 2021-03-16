@@ -23,7 +23,7 @@ public:
     void OnTrackHeightChanged(wxCommandEvent&);
     void SetTrackHeight(int index, int height);
 
-    void OnAddTrack(const Track& t) override;
+    void OnAddTrack(Track& t) override;
 private:
     std::vector<TrackHeader*> trackHeaders;
     wxDECLARE_EVENT_TABLE();

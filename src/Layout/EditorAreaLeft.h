@@ -4,12 +4,13 @@
 #include <wx/panel.h>
 
 #include "TrackHeaderArea.h"
+#include "Core/TrackManager.h"
 
 class EditorAreaLeft
 	: public wxPanel
 {
 public:
-	EditorAreaLeft(wxWindow*);
+	EditorAreaLeft(wxWindow*, TrackManager&);
 	~EditorAreaLeft();
 	TrackHeaderArea* GetTrackHeaderArea();
 private:

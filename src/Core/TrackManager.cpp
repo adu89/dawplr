@@ -1,11 +1,5 @@
 #include "TrackManager.h"
 
-TrackManager& TrackManager::Instance()
-{
-	static TrackManager trackManager;
-	return trackManager;
-}
-
 std::vector<Track>& TrackManager::GetTracks()
 {
 	return tracks;

@@ -2,12 +2,13 @@
 
 #include <wx/window.h>
 #include <wx/splitter.h>
-#include "Events/TrackBodyHeightChangedEvent.h"
+#include "Core/TrackManager.h"
+
 class EditorArea
 	: public wxSplitterWindow
 {
 public:
-	EditorArea(wxWindow* parent);
+	EditorArea(wxWindow*, TrackManager&);
 	~EditorArea();
 
 	bool OnSashPositionChange(int) override;

@@ -5,23 +5,23 @@
 TrackLanes::TrackLanes(wxWindow* parent)
     : wxPanel(parent, wxID_ANY)
 {
-    TrackManager& trackManager = TrackManager::Instance();
+    // TrackManager& trackManager = TrackManager::Instance();
 
-    for (int i = 0; i < trackManager.GetTracks().size(); i++)
-    {
-        trackLanes.push_back(new TrackLane(this, i));
-    }
+    // for (int i = 0; i < trackManager.GetTracks().size(); i++)
+    // {
+    //     trackLanes.push_back(new TrackLane(this, i));
+    // }
 
-    trackManager.AddListener(this);
+    // trackManager.AddListener(this);
 
-    Bind(wxEVT_SIZE, &TrackLanes::OnSize, this);
-    Bind(TRACK_LANE_HEIGHT_CHANGED, &TrackLanes::OnTrackHeightChanged, this);
+    // Bind(wxEVT_SIZE, &TrackLanes::OnSize, this);
+    // Bind(TRACK_LANE_HEIGHT_CHANGED, &TrackLanes::OnTrackHeightChanged, this);
 }
 
 TrackLanes::~TrackLanes()
 {
-    TrackManager& trackManager = TrackManager::Instance();
-    trackManager.RemoveListener(this);
+    // TrackManager& trackManager = TrackManager::Instance();
+    // trackManager.RemoveListener(this);
 }
 
 void TrackLanes::OnSize(wxSizeEvent& e) 
@@ -64,7 +64,7 @@ void TrackLanes::OnTrackHeightChanged(wxCommandEvent& m)
     m.Skip();
 }
 
-void TrackLanes::OnAddTrack(const Track& t)
+void TrackLanes::OnAddTrack(Track& t)
 {
     trackLanes.push_back(new TrackLane(this, trackLanes.size()));
     this->PostSizeEvent();

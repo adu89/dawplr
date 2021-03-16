@@ -19,7 +19,7 @@ EditorView::EditorView(wxWindow* parent)
     Bind(wxEVT_SCROLLWIN_LINEUP, &EditorView::ScrollUp, this);   
     Bind(wxEVT_SCROLLWIN_LINEDOWN, &EditorView::ScrollDown, this);  
     Bind(V_SASH_DRAGGING, &EditorView::OnVSashDragging, this);
-    Bind(TRACK_HEADER_HEIGHT_CHANGED, &EditorView::OnTrackHeaderHeightChanged, this);
+    // Bind(TRACK_HEADER_HEIGHT_CHANGED, &EditorView::OnTrackHeaderHeightChanged, this);
     Bind(TRACK_LANE_HEIGHT_CHANGED, &EditorView::OnTrackLaneHeightChanged, this);
     Bind(TRACK_LIST_CHANGED, &EditorView::OnTrackListChanged, this);
 }

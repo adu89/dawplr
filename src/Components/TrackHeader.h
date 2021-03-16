@@ -4,22 +4,17 @@
 #include <wx/window.h>
 
 #include "Components/HSash.h"
-
-wxDECLARE_EVENT(TRACK_HEADER_HEIGHT_CHANGED, wxCommandEvent);
+#include "Core/Track.h"
 
 class TrackHeader 
     : public wxPanel 
 {
 public:
-    TrackHeader(wxWindow*, int);
-    ~TrackHeader();    
-    void HandleMouseWheelEvent(wxMouseEvent&);
-    void OnHSashDragging(wxCommandEvent&);
-    int GetHeight();
-    void SetHeight(int);
+    TrackHeader(wxWindow*, int, Track&);
+    ~TrackHeader();        
+
 private:
     HSash* hSash;
-    int height;
-    int index;
-    wxDECLARE_EVENT_TABLE();
+    void onSashDragging(wxCommandEvent&);
+    Track& track;
 };

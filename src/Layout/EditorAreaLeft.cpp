@@ -4,12 +4,12 @@
 
 #include <wx/sizer.h>
 
-EditorAreaLeft::EditorAreaLeft(wxWindow* parent)
+EditorAreaLeft::EditorAreaLeft(wxWindow* parent, TrackManager& trackManager)
 	: wxPanel(parent, wxID_ANY)
 {
 	wxBoxSizer* boxSizer = new wxBoxSizer(wxVERTICAL);
 
-	trackHeaderArea = new TrackHeaderArea(this);
+	trackHeaderArea = new TrackHeaderArea(this, trackManager);
 	EditorAreaLeftBottomControls* editorAreaLeftBottomControls = new EditorAreaLeftBottomControls(this);
 
 	boxSizer->Add(trackHeaderArea, 1, wxEXPAND);

@@ -5,23 +5,23 @@ wxDEFINE_EVENT(TRACK_LIST_CHANGED, wxCommandEvent);
 TrackHeaders::TrackHeaders(wxWindow* parent)
     : wxPanel(parent, wxID_ANY)
 {
-    TrackManager& trackManager = TrackManager::Instance();
+    // TrackManager& trackManager = TrackManager::Instance();
 
-    for(int i = 0; i < trackManager.GetTracks().size(); i++)
-    {
-        trackHeaders.push_back(new TrackHeader(this, i));
-    }
+    // for(int i = 0; i < trackManager.GetTracks().size(); i++)
+    // {
+    //     trackHeaders.push_back(new TrackHeader(this, i));
+    // }
 
-    trackManager.AddListener(this);
+    // trackManager.AddListener(this);
 
-    Bind(wxEVT_SIZE, &TrackHeaders::OnSize, this);
-    Bind(TRACK_HEADER_HEIGHT_CHANGED, &TrackHeaders::OnTrackHeightChanged, this);
+    // Bind(wxEVT_SIZE, &TrackHeaders::OnSize, this);
+    // Bind(TRACK_HEADER_HEIGHT_CHANGED, &TrackHeaders::OnTrackHeightChanged, this);
 }
 
 TrackHeaders::~TrackHeaders()
 {
-    TrackManager& trackManager = TrackManager::Instance();
-    trackManager.RemoveListener(this);
+    // TrackManager& trackManager = TrackManager::Instance();
+    // trackManager.RemoveListener(this);
 }
 
 void TrackHeaders::OnSize(wxSizeEvent& e) 
@@ -32,7 +32,7 @@ void TrackHeaders::OnSize(wxSizeEvent& e)
 
     for(int i = 0; i < trackHeaders.size(); i++)
     {
-        trackHeaderRect = wxRect(trackHeaderRect.GetBottomLeft() + wxPoint(0, 1), wxSize(clientRect.GetWidth(), trackHeaders[i]->GetHeight()));
+        // trackHeaderRect = wxRect(trackHeaderRect.GetBottomLeft() + wxPoint(0, 1), wxSize(clientRect.GetWidth(), trackHeaders[i]->GetHeight()));
         trackHeaders[i]->SetSize(trackHeaderRect);
     }
 }
@@ -51,12 +51,12 @@ int TrackHeaders::GetHeight()
 
 void TrackHeaders::SetTrackHeight(int index, int height)
 {
-    trackHeaders[index]->SetHeight(height);
+    // trackHeaders[index]->SetHeight(height);
 }
 
-void TrackHeaders::OnAddTrack(const Track& t)
+void TrackHeaders::OnAddTrack(Track& t)
 {
-    trackHeaders.push_back(new TrackHeader(this, trackHeaders.size()));
+    trackHeaders.push_back(new TrackHeader(this, trackHeaders.size(), t));
     this->PostSizeEvent();
 
     wxCommandEvent event(TRACK_LIST_CHANGED);

@@ -2,12 +2,14 @@
 
 #include "wx/frame.h"
 
+#include "Core/TrackManager.h"
+
 class MainWindow 
     : public wxFrame 
 {
 public:
-    MainWindow();
-    ~MainWindow() override;
+    MainWindow(TrackManager&);
+    ~MainWindow();
 private:
     void onFileOpen(wxCommandEvent& event);
     void onFileNew(wxCommandEvent& event);
@@ -19,4 +21,6 @@ private:
     void onSettingsAudioSettings(wxCommandEvent& event);
     void onHelpDocumentation(wxCommandEvent& event);
     void onHelpAbout(wxCommandEvent& event);
+
+    TrackManager& trackManager;
 };

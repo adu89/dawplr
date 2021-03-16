@@ -6,13 +6,11 @@ bool Dawplr::OnInit()
 {    
     wxApp::OnInit();
 
-    TrackManager& trackManager = TrackManager::Instance();
-
     Track t = Track("Accoustic Guitar", 2, false, false);
 
     trackManager.AddTrack(std::move(t));
 
-    MainWindow* mainWindow = new MainWindow();
+    MainWindow* mainWindow = new MainWindow(trackManager);
 
     mainWindow->Show(true);
     mainWindow->Maximize();

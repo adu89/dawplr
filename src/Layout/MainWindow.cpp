@@ -9,15 +9,15 @@
 #include <AudioFile.h>
 
 #include "Core/Constants.h"
-#include "Core/TrackManager.h"
 #include "Core/Track.h"
 #include "Core/Region.h"
 #include "MainMenu.h"
 #include "TransportBar.h"
 #include "MainVerticalSplitter.h"
 
-MainWindow::MainWindow()
+MainWindow::MainWindow(TrackManager& trackManager)
     : wxFrame(NULL, wxID_ANY, Constants::MAIN_WINDOW_TITLE)
+    , trackManager(trackManager)
 { 
     SetBackgroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_BTNFACE));
     
@@ -30,7 +30,7 @@ MainWindow::MainWindow()
 
     mainBoxSizer->AddSpacer(4);
 
-    MainVerticalSplitter* mainVerticalSplitter = new MainVerticalSplitter(this);
+    MainVerticalSplitter* mainVerticalSplitter = new MainVerticalSplitter(this, trackManager);
     mainBoxSizer->Add(mainVerticalSplitter, 1, wxEXPAND);
 
     Bind(wxEVT_MENU, &MainWindow::onFileOpen, this, Events::FileOpen);
@@ -108,7 +108,6 @@ void MainWindow::onInsertFile(wxCommandEvent& event)
         AudioFile<float> file;
         file.load(insertFileDialog.GetPath());
 
-        TrackManager& trackManager = TrackManager::Instance();
         Track track = Track(insertFileDialog.GetFilename(), file.getNumChannels(), false, false);
         long size = file.samples[0].size();
         track.AddRegion(Region(insertFileDialog.GetFilename(), 0, size, std::move(file)));
@@ -122,7 +121,6 @@ void MainWindow::onInserTrack(wxCommandEvent& event)
 
     if (textEntryDialog.ShowModal() == wxID_OK)
     {
-        TrackManager& trackManager = TrackManager::Instance();
         trackManager.AddTrack(Track(textEntryDialog.GetValue(), 2, true, true));
     }
 }

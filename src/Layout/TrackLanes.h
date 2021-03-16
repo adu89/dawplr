@@ -20,7 +20,7 @@ public:
     void SetTrackHeight(int index, int height);
     void HandleMouseWheelEvent(wxMouseEvent&); 
     void OnTrackHeightChanged(wxCommandEvent&);
-    void OnAddTrack(const Track& t) override;
+    void OnAddTrack(Track& t) override;
 private:
     std::vector<TrackLane*> trackLanes;    
     wxDECLARE_EVENT_TABLE();

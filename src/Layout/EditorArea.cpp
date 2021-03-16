@@ -5,13 +5,13 @@
 #include "EditorAreaRight.h"
 #include "TrackHeaderArea.h"
 
-EditorArea::EditorArea(wxWindow* parent)
+EditorArea::EditorArea(wxWindow* parent, TrackManager& trackManager)
 	: wxSplitterWindow(parent, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxSP_3D | wxSP_LIVE_UPDATE)
 {
 	SetMinimumPaneSize(Constants::TRACK_HEADER_MIN_WIDTH);
 
-	EditorAreaLeft* editorAreaLeft = new EditorAreaLeft(this);
-	EditorAreaRight* editorAreaRight = new EditorAreaRight(this);	
+	EditorAreaLeft* editorAreaLeft = new EditorAreaLeft(this, trackManager);
+	EditorAreaRight* editorAreaRight = new EditorAreaRight(this, trackManager);	
 
 	auto trackHeaderArea = editorAreaLeft->GetTrackHeaderArea();
 	trackHeaderArea->SetOtherWindow(editorAreaRight);

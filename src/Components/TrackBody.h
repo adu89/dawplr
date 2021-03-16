@@ -3,8 +3,6 @@
 #include <wx/panel.h>
 #include <wx/window.h>
 
-#include "Events/TrackBodyHeightChangedEvent.h"
-
 class HSash;
 class RegionArea;
 

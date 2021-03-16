@@ -13,18 +13,13 @@
 #include "Core/Constants.h"
 #include "Core/TrackManager.h"
 #include "Components/HMeter.h"
+#include "Events/TrackHeaderHeightChangedEvent.h"
 
-wxDEFINE_EVENT(TRACK_HEADER_HEIGHT_CHANGED, wxCommandEvent);
-
-TrackHeader::TrackHeader(wxWindow* parent, int index) 
+TrackHeader::TrackHeader(wxWindow* parent, int index, Track& track) 
     : wxPanel(parent, index)
-    , height(Constants::TRACK_HEADER_HEIGHT)
-    , index(index)
+    , track(track)
 {    
     using namespace Constants;
-    
-    auto& trackManager = TrackManager::Instance();
-    auto track = trackManager.GetTracks().at(index);
 
     wxBoxSizer* mainBoxSizer = new wxBoxSizer(wxVERTICAL);
 
@@ -50,12 +45,12 @@ TrackHeader::TrackHeader(wxWindow* parent, int index)
     wxToggleButton* solo = new wxToggleButton(this, wxID_ANY, wxString("S"), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT);
     solo->SetMinSize(wxSize(SOLO_BUTTON_WIDTH, -1));
     horizontalBoxSizer->Add(solo, 0, wxTOP | wxLEFT, 10);
-    solo->SetValue(track.IsSoloed());
+    solo->SetValue(true);
 
     wxToggleButton* mute = new wxToggleButton(this, wxID_ANY, wxString("M"), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT);
     mute->SetMinSize(wxSize(MUTE_BUTTON_WIDTH, -1));
     horizontalBoxSizer->Add(mute, 0, wxTOP | wxRIGHT, 10);
-    mute->SetValue(track.IsMuted());
+    mute->SetValue(false);
 
     wxBoxSizer* hashSizer = new wxBoxSizer(wxHORIZONTAL);
     hSash = new HSash(this);
@@ -66,40 +61,27 @@ TrackHeader::TrackHeader(wxWindow* parent, int index)
     this->SetSizer(mainBoxSizer);
     this->Layout();
 
-    Bind(H_SASH_DRAGGING, &TrackHeader::OnHSashDragging, this);
+	SetMinSize(wxSize(-1, Constants::TRACK_HEADER_HEIGHT + Constants::SASH_HEIGHT)); 
+
+    Bind(H_SASH_DRAGGING, &TrackHeader::onSashDragging, this);
 }
 
 TrackHeader::~TrackHeader() 
 {    
 }
 
-int TrackHeader::GetHeight()
+void TrackHeader::onSashDragging(wxCommandEvent& e)
 {
-    return height;
+    using namespace Constants;
+
+    int sashHeight = hSash->GetSize().GetHeight();
+    int sashY = e.GetInt();
+
+    int nextTrackHeaderHeight = wxMax(TRACK_HEADER_MIN_HEIGHT + sashHeight, sashY + sashHeight);
+    nextTrackHeaderHeight = wxMin(TRACK_HEADER_MAX_HEIGHT + sashHeight, nextTrackHeaderHeight);
+
+    SetMinSize(wxSize(-1, nextTrackHeaderHeight));
+
+    TrackHeaderHeightChangedEvent event(GetId(), nextTrackHeaderHeight);
+    wxPostEvent(GetParent(), event);
 }
-
-void TrackHeader::SetHeight(int h)
-{
-    height = h;
-}
-
-void TrackHeader::OnHSashDragging(wxCommandEvent& e)
-{
-    // height = hSash->GetY() + 1;
-    
-    // wxCommandEvent event(TRACK_HEADER_HEIGHT_CHANGED);
-
-    // event.SetId(index);
-    // event.SetInt(height);
-
-    // wxPostEvent(GetParent(), event);
-}
-
-void TrackHeader::HandleMouseWheelEvent(wxMouseEvent& m) 
-{    
-    m.Skip();
-}
-
-BEGIN_EVENT_TABLE(TrackHeader, wxWindow)
-    EVT_MOUSEWHEEL(TrackHeader::HandleMouseWheelEvent)
-END_EVENT_TABLE()

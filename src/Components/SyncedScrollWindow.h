@@ -44,7 +44,8 @@ private:
         {
             isSyncing = true;
 
-            otherWindow->Scroll(GetViewStart());
+            //Ignore scrolling in the x direction.
+            otherWindow->Scroll(wxPoint(otherWindow->GetViewStart().x, GetViewStart().y));
 
             isSyncing = false;
         }

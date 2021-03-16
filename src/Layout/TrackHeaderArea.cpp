@@ -1,38 +1,60 @@
 #include "TrackHeaderArea.h"
 
-#include <wx/gbsizer.h>
 #include <wx/log.h>
 
 #include "Components/TrackBody.h"
+#include "Components/TrackHeader.h"
+#include "Core/Constants.h"
 
-TrackHeaderArea::TrackHeaderArea(wxWindow* parent)
+TrackHeaderArea::TrackHeaderArea(wxWindow* parent, TrackManager& trackManager)
     : SyncedScrolledWindow(parent)
+	, trackManager(trackManager)
 {
-	wxGridBagSizer* gbSizer = new wxGridBagSizer(0, 0);
+	sizer = new wxGridBagSizer();
+	sizer->AddGrowableCol(0);
 
-	for (int i = 0; i < 25; i++)
+	auto& tracks = trackManager.GetTracks();
+
+	for(int i = 0; i < tracks.size(); ++i)
 	{
-		TrackBody* trackBody = new TrackBody(this, i);
-		gbSizer->Add(trackBody, wxGBPosition(i, 0));
+		TrackHeader* trackHeader = new TrackHeader(this, i, tracks[i]);
+		sizer->Add(trackHeader, wxGBPosition(i, 0), wxDefaultSpan, wxEXPAND);
 	}
 
-	SetSizer(gbSizer);
+	SetSizer(sizer);
 	FitInside();
-	SetScrollRate(10, 10);
+	SetScrollRate(20, 20);
 
-    DoShowScrollbars(wxSHOW_SB_NEVER, wxSHOW_SB_NEVER);
+	DoShowScrollbars(wxSHOW_SB_NEVER, wxSHOW_SB_NEVER);
 
 	Bind(TRACK_BODY_HEIGHT_CHANGED, &TrackHeaderArea::onTrackBodyHeightChanged, this);
+	Bind(TRACK_HEADER_HEIGHT_CHANGED, &TrackHeaderArea::onTrackHeaderHeightChanged, this);
+
+	trackManager.AddListener(this);
 }
 
 TrackHeaderArea::~TrackHeaderArea()
 {
+	trackManager.RemoveListener(this);
 }
 
 void TrackHeaderArea::onTrackBodyHeightChanged(TrackBodyHeightChangedEvent& e)
 {
-	auto trackBody = static_cast<TrackBody*>(GetWindowChild(e.GetIndex()));
-	trackBody->SetMinSize(wxSize(2000, e.GetHeight()));
+	auto trackHeader = static_cast<TrackHeader*>(GetWindowChild(e.GetIndex()));
+	trackHeader->SetMinSize(wxSize(-1, e.GetHeight()));
+	FitInside();
+}
 
+void TrackHeaderArea::OnAddTrack(Track& track)
+{
+	auto trackIndex = trackManager.GetTracks().size() - 1;
+	TrackHeader* trackHeader = new TrackHeader(this, trackIndex, track);
+	sizer->Add(trackHeader, wxGBPosition(trackIndex, 0), wxDefaultSpan, wxEXPAND);
+	FitInside();
+}
+
+void TrackHeaderArea::onTrackHeaderHeightChanged(TrackHeaderHeightChangedEvent& e)
+{
+	wxPostEvent(otherWindow, e);
 	FitInside();
 }

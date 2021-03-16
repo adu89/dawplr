@@ -3,6 +3,7 @@
 #include "Core/Constants.h"
 #include "Components/RegionArea.h"
 #include "Components/HSash.h"
+#include "Events/TrackBodyHeightChangedEvent.h"
 
 #include <wx/scrolwin.h>
 #include <wx/sizer.h>
@@ -46,7 +47,4 @@ void TrackBody::onSashDragging(wxCommandEvent& e)
 
     TrackBodyHeightChangedEvent event(GetId(), nextTrackBodyHeight);
     wxPostEvent(GetParent(), event);
-    
-
-    //GetParent()->FitInside();
 }
